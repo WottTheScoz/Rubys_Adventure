@@ -12,10 +12,16 @@ public class EnemyController : MonoBehaviour
     Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
+    
+    //
+    float storedSpeed;
 
     Animator animator;
 
     bool broken = true;
+
+    //
+    bool stunned = false;
 
     public ParticleSystem smokeEffect;
 
@@ -29,6 +35,9 @@ public class EnemyController : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
         animator = GetComponent<Animator>();
+
+        //
+        storedSpeed = speed;
 
         if (RubyController.fixedRobotsAmount == 0) //Sets the number of fixed robots to 0 when starting. This code is optional; you can just set fixedText to "0" in the Inspector.
         {
@@ -54,6 +63,12 @@ public class EnemyController : MonoBehaviour
         {
             direction = -direction;
             timer = changeTime;
+        }
+
+        //
+        if(stunned == true)
+        {
+            speed = 0f;
         }
     }
 
@@ -112,14 +127,15 @@ public class EnemyController : MonoBehaviour
     //
     public void Stun()
     {
+        stunned = true;
         StartCoroutine(StunTime());
     }
 
     //
     IEnumerator StunTime()
     {
-        rigidbody2D.simulated = false;
         yield return new WaitForSeconds(3);
-        rigidbody2D.simulated = true;
+        stunned = false;
+        speed = storedSpeed;
     }
 }

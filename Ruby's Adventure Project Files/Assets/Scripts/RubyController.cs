@@ -121,6 +121,8 @@ public class RubyController : MonoBehaviour
         {
             holdDownEndTime = Time.time;
 
+            audioSource.Stop();
+
             if(holdDownEndTime - holdDownStartTime > 1f)
             {
                 if (stunnerOn == true && noCogs != true)
