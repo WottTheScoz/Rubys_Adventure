@@ -128,14 +128,12 @@ public class RubyController : MonoBehaviour
                 if (stunnerOn == true && noCogs != true)
                 {
                     Launch(stunProjectile);
-                    holdDownStartTime = holdDownStartTime - Time.time;
                     ChangeStunBar(-1);
                 }
             }
-            else if (holdDownEndTime - holdDownStartTime <= 1f)
+            else
             {
                 Launch(projectilePrefab);
-                holdDownStartTime = holdDownStartTime - Time.time;
             }
         }
 
@@ -210,6 +208,7 @@ public class RubyController : MonoBehaviour
         {
             stunnerOn = false;
         }
+
         stunCogsLeft = Mathf.Clamp(stunCogsLeft + amount, 0, 3);
         UIPowerupBar.instance.SetValue(stunCogsLeft / (float)3f);
     }
