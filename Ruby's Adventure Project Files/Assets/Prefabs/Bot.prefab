@@ -153,6 +153,8 @@ MonoBehaviour:
   vertical: 0
   changeTime: 1
   smokeEffect: {fileID: 5624542297590881953}
+  fixedText: {fileID: 0}
+  playerCharacter: {fileID: 0}
 --- !u!95 &5155697439406983706
 Animator:
   serializedVersion: 5

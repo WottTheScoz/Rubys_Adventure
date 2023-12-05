@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; //Allows you to reference TextMeshProUGUI.
 
 public class EnemyController : MonoBehaviour
 {
@@ -18,12 +19,21 @@ public class EnemyController : MonoBehaviour
 
     public ParticleSystem smokeEffect;
 
+    public TextMeshProUGUI fixedText; //A TextMeshPro GameObject that shows the number of robots fixed.
+
+    public GameObject playerCharacter; //The Ruby playable character GameObject.
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
         animator = GetComponent<Animator>();
+
+        if (RubyController.fixedRobotsAmount == 0) //Sets the number of fixed robots to 0 when starting. This code is optional; you can just set fixedText to "0" in the Inspector.
+        {
+            fixedText.text = RubyController.fixedRobotsAmount.ToString();
+        }
     }
 
     void Update()
@@ -89,5 +99,27 @@ public class EnemyController : MonoBehaviour
         rigidbody2D.simulated = false;
         animator.SetTrigger("Fixed");
         smokeEffect.Stop();
+
+        RubyController player = playerCharacter.GetComponent<RubyController>(); //Changes the on-screen text everytime a robot is fixed.
+        RubyController.fixedRobotsAmount = RubyController.fixedRobotsAmount + 1;
+        fixedText.text = RubyController.fixedRobotsAmount.ToString();
+        if(RubyController.fixedRobotsAmount == player.maxRobots) //Brings up the win screen when fixing the max amount of robots.
+        {
+            player.VictoryScreen();
+        }
+    }
+
+    //
+    public void Stun()
+    {
+        StartCoroutine(StunTime());
+    }
+
+    //
+    IEnumerator StunTime()
+    {
+        rigidbody2D.simulated = false;
+        yield return new WaitForSeconds(3);
+        rigidbody2D.simulated = true;
     }
 }

@@ -6,6 +6,10 @@ public class Projectile : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
 
+    //
+    public GameObject CogBullet;
+    public GameObject StunCog;
+
     void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -22,12 +26,20 @@ public class Projectile : MonoBehaviour
         rigidbody2d.AddForce(direction * force);
     }
 
+    //
     void OnCollisionEnter2D(Collision2D other)
     {
         EnemyController e = other.collider.GetComponent<EnemyController>();
         if (e != null)
         {
-            e.Fix();
+            if(gameObject == CogBullet)
+            {
+                e.Fix();
+            }
+            else if(gameObject == StunCog)
+            {
+                e.Stun();
+            }
         }
         Destroy(gameObject);
     }
