@@ -9075,6 +9075,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5288557087712076003, guid: ef9de68d5f1b7b149a3399d63df222ae, type: 3}
+      propertyPath: m_Name
+      value: StunBarCanvas
+      objectReference: {fileID: 0}
     - target: {fileID: 6357021239808637502, guid: ef9de68d5f1b7b149a3399d63df222ae, type: 3}
       propertyPath: m_Camera
       value: 

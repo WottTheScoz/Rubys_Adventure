@@ -31,11 +31,14 @@ public class RubyController : MonoBehaviour
     Vector2 lookDirection = new Vector2(1, 0);
 
     public GameObject projectilePrefab;
+
     //
     public GameObject stunProjectile;
 
     public AudioClip throwSound;
     public AudioClip hitSound;
+
+    //
     public AudioClip chargeSound;
     public AudioClip stunThrowSound;
 
@@ -49,7 +52,7 @@ public class RubyController : MonoBehaviour
 
     public GameObject victoryText; //Text that is set active when all robots have been fixed.
 
-    //Determines whether or not the player has the stun cog powerup.
+    //
     public bool stunnerOn = false;
 
     //
